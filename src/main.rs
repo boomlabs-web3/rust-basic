@@ -30,6 +30,10 @@ impl<T, U> MiniVec<T, U> {
     }
 }
 
+fn use_minivec<T, U>(v: MiniVec<T, U>) -> Option<U> {
+    v.id
+}
+
 fn main() {
     let mut v = MiniVec::new();
     v.push(10);
@@ -46,6 +50,10 @@ fn main() {
 
     println!(
         "v = {:?}\n v2 = {:?}\n v3 = {:?}\n v4 = {:?}",
-        v, v2, v3, v4
+        use_minivec(v),
+        use_minivec(v2),
+        use_minivec(v3),
+        use_minivec(v4)
     );
+    // v4.set_id(1001); // error[E0382]: borrow of moved value: `v4`
 }
