@@ -30,8 +30,8 @@ impl<T, U> MiniVec<T, U> {
     }
 }
 
-fn use_minivec<T, U>(v: MiniVec<T, U>) -> Option<U> {
-    v.id
+fn use_minivec<'a, T, U>(v: &'a MiniVec<T, U>) -> &'a [T] {
+    &v.contents
 }
 
 fn main() {
@@ -50,10 +50,17 @@ fn main() {
 
     println!(
         "v = {:?}\n v2 = {:?}\n v3 = {:?}\n v4 = {:?}",
-        use_minivec(v),
-        use_minivec(v2),
-        use_minivec(v3),
-        use_minivec(v4)
+        use_minivec(&v),
+        use_minivec(&v2),
+        use_minivec(&v3),
+        use_minivec(&v4)
     );
-    // v4.set_id(1001); // error[E0382]: borrow of moved value: `v4`
+    v4.set_id(1001);
+    println!("v4 = {:?}", v4);
+
+    let mut slice = use_minivec(&v2);
+    if let Some(x) = slice.get(0) {
+        // *x = 'd'; // error[E0594]: cannot assign to `*x`, which is behind a `&` reference
+        println!("slice = {:?}", x);
+    }
 }
