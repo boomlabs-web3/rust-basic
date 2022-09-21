@@ -84,4 +84,14 @@ fn main() {
     use_ided1(&employee);
     use_ided2(&employee);
     use_ided3(Box::new(employee.clone()));
+
+    let student = Student { student_id: 1002 };
+
+    let mut v: Vec<Box<dyn Ided>> = Vec::new();
+    v.push(Box::new(employee));
+    v.push(Box::new(student));
+
+    for item in v {
+        println!("id: {}", item.my_id());
+    }
 }
