@@ -20,7 +20,8 @@ impl Employee {
         return employee;
     }
 
-    fn name(&self) -> &str {
+    // expanded or un-elided lifetime.
+    fn name<'a>(&'a self) -> &'a str {
         &self.name
     }
 
