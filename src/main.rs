@@ -1,19 +1,18 @@
-#[derive(Debug)]
-struct Employee {
-    name: String,
-    id: u64,
+use std::error::Error;
+
+fn process() -> Result<String, Box<dyn Error>> {
+    Ok("Hello, world!".to_string())
 }
 
-enum IsTrue {
-    True(u64),
-    False,
-}
+fn main() -> Result<(), Box<dyn Error>> {
+    let result = process();
 
-fn main() {
-    let my_value = IsTrue::True(100);
-
-    match my_value {
-        IsTrue::True(x) => println!("True {}", x),
-        IsTrue::False => println!("False"),
+    match result {
+        Ok(s) => println!("{}", s),
+        Err(e) => println!("Error: {}", e),
     }
+
+    println!("{}", process()?);
+
+    Ok(())
 }
