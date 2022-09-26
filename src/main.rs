@@ -1,5 +1,4 @@
-use parking_lot::Mutex;
-use std::error::Error;
+use std::{error::Error, sync::Arc};
 
 struct Employee {
     name: String,
@@ -35,11 +34,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     let employee = Employee::new_from_default();
     let employee2 = Employee::new("John".to_string(), 101);
 
-    let locked_employee = Mutex::new(employee);
+    let reference_counted = Arc::new(employee);
 
-    let unlocked_employee = locked_employee.lock();
-
-    println!("{} {}", unlocked_employee.name(), unlocked_employee.id());
+    println!("{} {}", reference_counted.name(), reference_counted.id());
 
     Ok(())
 }
