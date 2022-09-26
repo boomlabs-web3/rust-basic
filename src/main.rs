@@ -1,9 +1,13 @@
-fn greet(x: &str) -> String {
-    format!("{}", x)
+#[derive(Debug)]
+struct Employee {
+    name: String,
+    id: u64,
 }
 
 fn main() {
-    let my_greeting = "Hello, world!";
-    let result = greet(my_greeting);
-    println!("{}", result);
+    let employee = Employee {
+        name: "John".to_string(),
+        id: 101,
+    };
+    println!("{:#?}", employee);
 }
