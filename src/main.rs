@@ -1,3 +1,4 @@
+use parking_lot::Mutex;
 use std::error::Error;
 
 struct Employee {
@@ -30,19 +31,15 @@ impl Employee {
     }
 }
 
-// &Employee is borrowed here
-fn borrow_thing(employee: &Employee) {
-    println!("borrowed: {}", employee.name);
-} // borrowed &Employee is dropped here
-
 fn main() -> Result<(), Box<dyn Error>> {
     let employee = Employee::new_from_default();
     let employee2 = Employee::new("John".to_string(), 101);
 
-    borrow_thing(&employee);
+    let locked_employee = Mutex::new(employee);
 
-    println!("{} {}", employee.name(), employee.id());
-    println!("{} {}", employee2.name, employee2.id);
+    let unlocked_employee = locked_employee.lock();
+
+    println!("{} {}", unlocked_employee.name(), unlocked_employee.id());
 
     Ok(())
 }
