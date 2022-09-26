@@ -1,8 +1,7 @@
-#[test]
-fn my_test() {
-    assert!(true);
+fn greet(x: u64) {
+    println!("Hello to number {}", x);
 }
 
 fn main() {
-    println!("Hello, world!");
+    greet(100);
 }
