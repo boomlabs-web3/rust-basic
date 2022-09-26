@@ -1,18 +1,29 @@
 use std::error::Error;
 
-fn process() -> Result<String, Box<dyn Error>> {
-    Ok("Hello, world!".to_string())
+struct Employee {
+    name: String,
+    id: u64,
+}
+
+impl Employee {
+    fn new_from_default() -> Employee {
+        Employee {
+            name: "default".to_string(),
+            id: 100,
+        }
+    }
+
+    fn new(name: String, id: u64) -> Employee {
+        Employee { name, id }
+    }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let result = process();
+    let employee = Employee::new_from_default();
+    let employee2 = Employee::new("John".to_string(), 101);
 
-    match result {
-        Ok(s) => println!("{}", s),
-        Err(e) => println!("Error: {}", e),
-    }
-
-    println!("{}", process()?);
+    println!("{} {}", employee.name, employee.id);
+    println!("{} {}", employee2.name, employee2.id);
 
     Ok(())
 }
