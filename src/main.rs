@@ -1,7 +1,8 @@
-fn greet(x: u64) {
-    println!("Hello to number {}", x);
+fn greet(x: String) {
+    println!("Hello to {}", x);
 }
 
 fn main() {
-    greet(100);
+    let my_greeting = "Hello, world!".to_string();
+    greet(my_greeting);
 }
