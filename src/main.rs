@@ -16,13 +16,21 @@ impl Employee {
     fn new(name: String, id: u64) -> Employee {
         Employee { name, id }
     }
+
+    fn name(&self) -> String {
+        self.name.clone()
+    }
+
+    fn id(&self) -> u64 {
+        self.id
+    }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
     let employee = Employee::new_from_default();
     let employee2 = Employee::new("John".to_string(), 101);
 
-    println!("{} {}", employee.name, employee.id);
+    println!("{} {}", employee.name(), employee.id());
     println!("{} {}", employee2.name, employee2.id);
 
     Ok(())
