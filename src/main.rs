@@ -14,11 +14,14 @@ impl Employee {
     }
 
     fn new(name: String, id: u64) -> Employee {
-        Employee { name, id }
+        let employee = Employee { name, id };
+
+        // println!("{}", name); // error[E0382]: borrow of moved value: `name`
+        return employee;
     }
 
-    fn name(&self) -> String {
-        self.name.clone()
+    fn name(&self) -> &str {
+        &self.name
     }
 
     fn id(&self) -> u64 {
@@ -26,9 +29,16 @@ impl Employee {
     }
 }
 
+// &Employee is borrowed here
+fn borrow_thing(employee: &Employee) {
+    println!("borrowed: {}", employee.name);
+} // borrowed &Employee is dropped here
+
 fn main() -> Result<(), Box<dyn Error>> {
     let employee = Employee::new_from_default();
     let employee2 = Employee::new("John".to_string(), 101);
+
+    borrow_thing(&employee);
 
     println!("{} {}", employee.name(), employee.id());
     println!("{} {}", employee2.name, employee2.id);
