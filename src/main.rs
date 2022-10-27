@@ -71,9 +71,13 @@ impl PrintInfo for Product {
     }
 }
 
+fn static_print(data: impl PrintInfo) {
+    data.print_info();
+}
+
 fn main() {
     let employee = Employee::new("Jane".to_string(), 100);
     let product = Product::new("Apple".to_string(), 1, 100, 20220924);
-    employee.print_info();
-    product.print_info();
+    static_print(employee);
+    static_print(product);
 }
