@@ -18,6 +18,33 @@ impl Employee {
     }
 }
 
+struct Product {
+    name: String,
+    price: u64,
+    quantity: u64,
+    production_date: u64,
+}
+
+impl Product {
+    fn new(name: String, price: u64, quantity: u64, production_date: u64) -> Product {
+        Product {
+            name,
+            price,
+            quantity,
+            production_date,
+        }
+    }
+
+    fn date(&self) -> String {
+        let mut date = self.production_date;
+        let year: u64 = date / 10000;
+        date = date - year * 10000;
+        let month = date / 100;
+        date = date - month * 100;
+        format!("{}/{}/{}", year, month, date)
+    }
+}
+
 trait PrintInfo {
     fn print_info(&self);
 }
@@ -32,8 +59,21 @@ impl PrintInfo for Employee {
     }
 }
 
+impl PrintInfo for Product {
+    fn print_info(&self) {
+        println!(
+            "Product's name: {}\nProduct's price: {}\nProduct quantity: {}\nProduction date: {}",
+            self.name,
+            self.price,
+            self.quantity,
+            self.date()
+        );
+    }
+}
+
 fn main() {
     let employee = Employee::new("Jane".to_string(), 100);
-
+    let product = Product::new("Apple".to_string(), 1, 100, 20220924);
     employee.print_info();
+    product.print_info();
 }
