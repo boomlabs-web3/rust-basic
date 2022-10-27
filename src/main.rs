@@ -1,3 +1,4 @@
+#[derive(Clone)]
 struct Employee {
     name: String,
     id: u64,
@@ -18,6 +19,7 @@ impl Employee {
     }
 }
 
+#[derive(Clone)]
 struct Product {
     name: String,
     price: u64,
@@ -75,9 +77,15 @@ fn static_print(data: impl PrintInfo) {
     data.print_info();
 }
 
+fn dynamic_print(data: Box<dyn PrintInfo>) {
+    data.print_info();
+}
+
 fn main() {
     let employee = Employee::new("Jane".to_string(), 100);
     let product = Product::new("Apple".to_string(), 1, 100, 20220924);
-    static_print(employee);
-    static_print(product);
+    static_print(employee.clone());
+    static_print(product.clone());
+    dynamic_print(Box::new(employee));
+    dynamic_print(Box::new(product));
 }
