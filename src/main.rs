@@ -4,13 +4,6 @@ struct Employee {
 }
 
 impl Employee {
-    fn new_from_default() -> Employee {
-        Employee {
-            name: "default".to_string(),
-            id: 100,
-        }
-    }
-
     fn new(name: String, id: u64) -> Employee {
         Employee { name, id }
     }
@@ -25,8 +18,22 @@ impl Employee {
     }
 }
 
-fn main() {
-    let employee = Employee::new_from_default();
+trait PrintInfo {
+    fn print_info(&self);
+}
 
-    println!("{} {}", employee.name(), employee.id());
+impl PrintInfo for Employee {
+    fn print_info(&self) {
+        println!(
+            "employee's name: {}\nemployee's id: {}\n",
+            self.name(),
+            self.id()
+        );
+    }
+}
+
+fn main() {
+    let employee = Employee::new("Jane".to_string(), 100);
+
+    employee.print_info();
 }
