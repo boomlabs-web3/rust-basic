@@ -18,16 +18,19 @@ fn main() {
     println!("Get 100: {:?}", employee_records.get(100));
     println!("---------------------------------------------\n");
 
-    println!("{:#?}", employee_records);
-    println!("Next: {:?}", employee_records.next());
-    println!("---------------------------------------------\n");
+    println!("Length: {}", employee_records.clone().count());
+    println!("Last: {:?}", employee_records.last().unwrap());
 
-    println!("{:#?}", employee_records);
-    println!("Get 100: {:?}", employee_records.get(100));
-    println!("---------------------------------------------\n");
+    // println!("{:#?}", employee_records);
+    // println!("Next: {:?}", employee_records.next());
+    // println!("---------------------------------------------\n");
 
-    for employee in &mut employee_records {
-        println!("For {:#?}", employee);
-    }
-    println!("{:#?}", employee_records);
+    // println!("{:#?}", employee_records);
+    // println!("Get 100: {:?}", employee_records.get(100));
+    // println!("---------------------------------------------\n");
+
+    // for employee in &mut employee_records {
+    //     println!("For {:#?}", employee);
+    // }
+    // println!("{:#?}", employee_records);
 }
