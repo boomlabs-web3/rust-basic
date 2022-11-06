@@ -1,17 +1,33 @@
 mod employee;
-use employee::Employee;
+use employee::{Employee, EmployeeRecords};
 
 mod printinfo;
-use printinfo::{dynamic_print, static_print};
-
-mod product;
-use product::Product;
 
 fn main() {
-    let employee = Employee::new("Jane".to_string(), 100);
-    let product = Product::new("Apple".to_string(), 1, 100, 20220924);
-    static_print(employee.clone());
-    static_print(product.clone());
-    dynamic_print(Box::new(employee));
-    dynamic_print(Box::new(product));
+    let john = Employee::new(String::from("John"), 100);
+    let jane = Employee::new(String::from("Jane"), 101);
+    let tom = Employee::new(String::from("Tom"), 102);
+
+    let mut employee_records = EmployeeRecords::new();
+    employee_records.push(john);
+    EmployeeRecords::push(&mut employee_records, jane);
+    employee_records.push(tom);
+
+    println!("{:#?}", employee_records);
+    println!("Get 101: {:?}", employee_records.get(101));
+    println!("Get 100: {:?}", employee_records.get(100));
+    println!("---------------------------------------------\n");
+
+    println!("{:#?}", employee_records);
+    println!("Next: {:?}", employee_records.next());
+    println!("---------------------------------------------\n");
+
+    println!("{:#?}", employee_records);
+    println!("Get 100: {:?}", employee_records.get(100));
+    println!("---------------------------------------------\n");
+
+    for employee in &mut employee_records {
+        println!("For {:#?}", employee);
+    }
+    println!("{:#?}", employee_records);
 }
