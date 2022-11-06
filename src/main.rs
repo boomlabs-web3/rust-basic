@@ -1,3 +1,4 @@
+mod cacher;
 mod closure;
 use closure::generate_workout;
 
