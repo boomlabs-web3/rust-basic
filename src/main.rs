@@ -1,9 +1,7 @@
+use std::mem;
+
 fn longest<'a, 'b: 'a>(x: &'a String, y: &'b String) -> &'a String {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    x
 }
 
 fn main() {
@@ -11,5 +9,6 @@ fn main() {
     let string2 = String::from("xyz");
 
     let result = longest(&string1, &string2);
+    mem::forget(string2);
     println!("The longest string is {}", result);
 }
