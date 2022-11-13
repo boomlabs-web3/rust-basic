@@ -1,4 +1,4 @@
-fn longest<'a>(x: &'a String, y: &'a String) -> &'a String {
+fn longest<'a, 'b: 'a>(x: &'a String, y: &'b String) -> &'a String {
     if x.len() > y.len() {
         x
     } else {
