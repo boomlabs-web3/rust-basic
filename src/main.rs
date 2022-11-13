@@ -1,4 +1,4 @@
-fn longest(x: &String, y: &String) -> &String {
+fn longest<'a>(x: &'a String, y: &'a String) -> &'a String {
     if x.len() > y.len() {
         x
     } else {
